@@ -12134,7 +12134,7 @@ Name: (98, 1), dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">asl_utils</span> <span class="k">import</span> <span class="n">test_features_tryit</span>
@@ -12283,7 +12283,7 @@ Name: (98, 1), dtype: object</pre>
 </div>
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[5]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12298,7 +12298,7 @@ Name: (98, 1), dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collect the features into a list</span>
@@ -12316,7 +12316,7 @@ Name: (98, 1), dtype: object</pre>
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -12342,7 +12342,7 @@ Name: (98, 1), dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">training</span> <span class="o">=</span> <span class="n">asl</span><span class="o">.</span><span class="n">build_training</span><span class="p">(</span><span class="n">features_ground</span><span class="p">)</span>
@@ -12382,7 +12382,7 @@ Name: (98, 1), dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">training</span><span class="o">.</span><span class="n">get_word_Xlengths</span><span class="p">(</span><span class="s1">&#39;CHOCOLATE&#39;</span><span class="p">)</span>
@@ -12397,7 +12397,7 @@ Name: (98, 1), dtype: object</pre>
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -12471,7 +12471,7 @@ Name: (98, 1), dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_means</span> <span class="o">=</span> <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;speaker&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -12487,7 +12487,7 @@ Name: (98, 1), dtype: object</pre>
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[13]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12584,7 +12584,7 @@ Name: (98, 1), dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;left-x-mean&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speaker&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">df_means</span><span class="p">[</span><span class="s1">&#39;left-x&#39;</span><span class="p">])</span>
@@ -12600,7 +12600,7 @@ Name: (98, 1), dtype: object</pre>
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12739,136 +12739,7 @@ Name: (98, 1), dtype: object</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:[</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">]})</span>
-<span class="n">df</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[36]:</div>
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>a</th>
-      <th>b</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>x</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>y</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>x</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>y</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[44]:</div>
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>0    1.0
-1    1.0
-2    1.0
-3    1.0
-Name: b, dtype: float64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_std</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;man-1&#39;</span><span class="p">,</span><span class="s1">&#39;left-x&#39;</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[27]:</div>
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>15.154424717846215</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">asl_utils</span> <span class="k">import</span> <span class="n">test_std_tryit</span>
@@ -12983,7 +12854,7 @@ Name: b, dtype: float64</pre>
 </div>
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[15]:</div>
+<div class="prompt output_prompt">Out[10]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13039,7 +12910,7 @@ Some ideas to get you started:<ul>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO add features for normalized by speaker values of left, right, x, y</span>
@@ -13060,10 +12931,10 @@ Some ideas to get you started:<ul>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[[</span><span class="n">norm</span><span class="p">,</span><span class="n">xy</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[[</span><span class="n">norm</span><span class="p">,</span><span class="n">xy</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13075,7 +12946,7 @@ Some ideas to get you started:<ul>
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[51]:</div>
+<div class="prompt output_prompt">Out[12]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13097,7 +12968,7 @@ Some ideas to get you started:<ul>
   </thead>
   <tbody>
     <tr>
-      <th rowspan="5" valign="top">98</th>
+      <th rowspan="3" valign="top">98</th>
       <th>0</th>
       <td>0.741835</td>
       <td>181</td>
@@ -13109,16 +12980,6 @@ Some ideas to get you started:<ul>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.741835</td>
-      <td>181</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.741835</td>
-      <td>181</td>
-    </tr>
-    <tr>
-      <th>4</th>
       <td>0.741835</td>
       <td>181</td>
     </tr>
@@ -13135,7 +12996,7 @@ Some ideas to get you started:<ul>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO add features for polar coordinate values where the nose is the origin</span>
@@ -13143,44 +13004,238 @@ Some ideas to get you started:<ul>
 <span class="c1"># Note that &#39;polar-rr&#39; and &#39;polar-rtheta&#39; refer to the radius and angle</span>
 
 <span class="n">features_polar</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;polar-rr&#39;</span><span class="p">,</span> <span class="s1">&#39;polar-rtheta&#39;</span><span class="p">,</span> <span class="s1">&#39;polar-lr&#39;</span><span class="p">,</span> <span class="s1">&#39;polar-ltheta&#39;</span><span class="p">]</span>
-<span class="n">features_polar_radius</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;polar-rr&#39;</span><span class="p">,</span><span class="s1">&#39;polar-lr&#39;</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">polar</span><span class="p">,</span> <span class="n">ground</span> <span class="ow">in</span> <span class="nb">zip</span> <span class="p">(</span><span class="n">features_polar</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">features_ground</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-    
+<span class="k">for</span> <span class="n">side</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;rl&#39;</span><span class="p">):</span>
+    <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;polar-</span><span class="si">{}</span><span class="s1">r&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">side</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;grnd-</span><span class="si">{}</span><span class="s1">x&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">side</span><span class="p">)]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;grnd-</span><span class="si">{}</span><span class="s1">y&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">side</span><span class="p">)]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;polar-</span><span class="si">{}</span><span class="s1">theta&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">side</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;grnd-</span><span class="si">{}</span><span class="s1">x&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">side</span><span class="p">)],</span> <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;grnd-</span><span class="si">{}</span><span class="s1">y&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">side</span><span class="p">)])</span>    
+
+<span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="n">features_ground</span><span class="o">+</span><span class="n">features_polar</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>grnd-rx</th>
+      <th>grnd-ry</th>
+      <th>grnd-lx</th>
+      <th>grnd-ly</th>
+      <th>polar-rr</th>
+      <th>polar-rtheta</th>
+      <th>polar-lr</th>
+      <th>polar-ltheta</th>
+    </tr>
+    <tr>
+      <th>video</th>
+      <th>frame</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">98</th>
+      <th>0</th>
+      <td>9</td>
+      <td>113</td>
+      <td>-12</td>
+      <td>119</td>
+      <td>113.35784</td>
+      <td>0.079478</td>
+      <td>119.603512</td>
+      <td>-0.100501</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>9</td>
+      <td>113</td>
+      <td>-12</td>
+      <td>119</td>
+      <td>113.35784</td>
+      <td>0.079478</td>
+      <td>119.603512</td>
+      <td>-0.100501</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO add features for left, right, x, y differences by one time step, i.e. the &quot;delta&quot; values discussed in the lecture</span>
 <span class="c1"># Name these &#39;delta-rx&#39;, &#39;delta-ry&#39;, &#39;delta-lx&#39;, and &#39;delta-ly&#39;</span>
 
 <span class="n">features_delta</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;delta-rx&#39;</span><span class="p">,</span> <span class="s1">&#39;delta-ry&#39;</span><span class="p">,</span> <span class="s1">&#39;delta-lx&#39;</span><span class="p">,</span> <span class="s1">&#39;delta-ly&#39;</span><span class="p">]</span>
+
+<span class="n">indexes</span> <span class="o">=</span> <span class="p">[(</span><span class="n">s</span><span class="p">,</span><span class="n">side</span><span class="p">,</span> <span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span><span class="n">side</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;rl&#39;</span><span class="p">),[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;xy&#39;</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span><span class="n">side</span><span class="p">,</span><span class="n">xy</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">:</span>
+    <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;delta-</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">xy</span><span class="p">)]</span> <span class="o">=</span> <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">side</span><span class="p">,</span><span class="n">xy</span><span class="p">)]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+<span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;delta&#39;</span><span class="p">)]</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[29]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;delta-rx&#39;, &#39;delta-ly&#39;, &#39;delta-ry&#39;, &#39;delta-lx&#39;]</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO add features of your own design, which may be a combination of the above or something else</span>
 <span class="c1"># Name these whatever you would like</span>
 
 <span class="c1"># TODO define a list named &#39;features_custom&#39; for building the training set</span>
+<span class="n">features_custom</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grnd-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">features_delta</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;features_custom = &#39;</span><span class="p">,</span> <span class="n">features_custom</span><span class="p">)</span>
+<span class="n">indexes</span> <span class="o">=</span> <span class="p">[(</span><span class="n">side</span><span class="p">,</span> <span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">side</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;rl&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;xy&#39;</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">side</span><span class="p">,</span><span class="n">xy</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">side</span><span class="p">,</span><span class="n">xy</span><span class="p">)</span>
+    <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;grnd-delta-</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">side</span><span class="p">,</span><span class="n">xy</span><span class="p">)]</span> <span class="o">=</span> <span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;grnd-</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">side</span><span class="p">,</span><span class="n">xy</span><span class="p">)]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="n">features_delta</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>features_custom =  [&#39;grnd-delta-rx&#39;, &#39;grnd-delta-ry&#39;, &#39;grnd-delta-lx&#39;, &#39;grnd-delta-ly&#39;]
+r x
+r y
+l x
+l y
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[34]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>delta-rx</th>
+      <th>delta-ry</th>
+      <th>delta-lx</th>
+      <th>delta-ly</th>
+    </tr>
+    <tr>
+      <th>video</th>
+      <th>frame</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">98</th>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13191,10 +13246,42 @@ Some ideas to get you started:<ul>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Question 1:</strong>  What custom features did you choose for the features_custom set and why?</p>
-<p><strong>Answer 1:</strong></p>
+<p><strong>Answer 1:</strong>
+I chose a delta values for the ground values (i.e. referenced with respect to nose) since the person might be moving his hand during the process and taking this shift into account might matter. As you can see in the following box 20% of the time for delta-rx. This can make a difference in the overall output.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;grnd-delta-rx&#39;</span><span class="p">]</span><span class="o">!=</span><span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;delta-rx&#39;</span><span class="p">]])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">asl</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[35]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.18646005334688176</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -13210,7 +13297,7 @@ feature sets.  The test simply looks for some valid values but is not exhaustive
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
@@ -13252,38 +13339,22 @@ feature sets.  The test simply looks for some valid values but is not exhaustive
 <div class="prompt"></div>
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>E..E
-======================================================================
-ERROR: test_features_delta (__main__.TestFeatures)
+<pre>....
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File &#34;&lt;ipython-input-52-4e7516a8b40e&gt;&#34;, line 19, in test_features_delta
-    sample = (asl.df.ix[98, 0][features_delta]).tolist()
-NameError: name &#39;features_delta&#39; is not defined
+Ran 4 tests in 0.021s
 
-======================================================================
-ERROR: test_features_polar (__main__.TestFeatures)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File &#34;&lt;ipython-input-52-4e7516a8b40e&gt;&#34;, line 15, in test_features_polar
-    sample = (asl.df.ix[98,1][features_polar]).tolist()
-NameError: name &#39;features_polar&#39; is not defined
-
-----------------------------------------------------------------------
-Ran 4 tests in 0.023s
-
-FAILED (errors=2)
+OK
 </pre>
 </div>
 </div>
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[52]:</div>
+<div class="prompt output_prompt">Out[36]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;unittest.runner.TextTestResult run=4 errors=2 failures=0&gt;</pre>
+<pre>&lt;unittest.runner.TextTestResult run=4 errors=0 failures=0&gt;</pre>
 </div>
 
 </div>
@@ -13320,7 +13391,7 @@ FAILED (errors=2)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
@@ -13342,6 +13413,31 @@ FAILED (errors=2)
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-39-741679189458&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">import</span> warnings
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> hmmlearn<span class="ansi-blue-fg">.</span>hmm <span class="ansi-green-fg">import</span> GaussianHMM
+<span class="ansi-green-intense-fg ansi-bold">      3</span> 
+<span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-green-fg">def</span> train_a_word<span class="ansi-blue-fg">(</span>word<span class="ansi-blue-fg">,</span> num_hidden_states<span class="ansi-blue-fg">,</span> features<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> 
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;hmmlearn&#39;</pre>
+</div>
+</div>
+
 </div>
 </div>
 

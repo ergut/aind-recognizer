@@ -66,7 +66,7 @@ asl.df.head()  # the new feature 'grnd-ry' is now in the frames dictionary
 
 # ##### Try it!
 
-# In[5]:
+# In[4]:
 
 from asl_utils import test_features_tryit
 # TODO add df columns for 'grnd-rx', 'grnd-ly', 'grnd-lx' representing differences between hand and nose locations
@@ -78,7 +78,7 @@ asl.df['grnd-lx'] = asl.df['left-x'] - asl.df['nose-x']
 test_features_tryit(asl)
 
 
-# In[6]:
+# In[5]:
 
 # collect the features into a list
 features_ground = ['grnd-rx','grnd-ry','grnd-lx','grnd-ly']
@@ -89,7 +89,7 @@ features_ground = ['grnd-rx','grnd-ry','grnd-lx','grnd-ly']
 # ##### Build the training set
 # Now that we have a feature list defined, we can pass that list to the `build_training` method to collect the features for all the words in the training set.  Each word in the training set has multiple examples from various videos.  Below we can see the unique words that have been loaded into the training set:
 
-# In[7]:
+# In[6]:
 
 training = asl.build_training(features_ground)
 print("Training words: {}".format(training.words))
@@ -97,7 +97,7 @@ print("Training words: {}".format(training.words))
 
 # The training data in `training` is an object of class `WordsData` defined in the `asl_data` module.  in addition to the `words` list, data can be accessed with the `get_all_sequences`, `get_all_Xlengths`, `get_word_sequences`, and `get_word_Xlengths` methods. We need the `get_word_Xlengths` method to train multiple sequences with the `hmmlearn` library.  In the following example, notice that there are two lists; the first is a concatenation of all the sequences(the X portion) and the second is a list of the sequence lengths(the Lengths portion).
 
-# In[8]:
+# In[7]:
 
 training.get_word_Xlengths('CHOCOLATE')
 
@@ -105,7 +105,7 @@ training.get_word_Xlengths('CHOCOLATE')
 # ###### More feature sets
 # So far we have a simple feature set that is enough to get started modeling.  However, we might get better results if we manipulate the raw values a bit more, so we will go ahead and set up some other options now for experimentation later.  For example, we could normalize each speaker's range of motion with grouped statistics using [Pandas stats](http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats) functions and [pandas groupby](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html).  Below is an example for finding the means of all speaker subgroups.
 
-# In[13]:
+# In[8]:
 
 df_means = asl.df.groupby('speaker').mean()
 df_means
@@ -113,7 +113,7 @@ df_means
 
 # To select a mean that matches by speaker, use the pandas [map](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.map.html) method:
 
-# In[14]:
+# In[9]:
 
 asl.df['left-x-mean']= asl.df['speaker'].map(df_means['left-x'])
 asl.df.head()
@@ -121,23 +121,7 @@ asl.df.head()
 
 # ##### Try it!
 
-# In[36]:
-
-df = pd.DataFrame({'a':['x','y','x','y'], 'b':[10,1,10,1]})
-df
-
-
-# In[44]:
-
-df['b'] / df.groupby('a')['b'].transform('mean')
-
-
-# In[27]:
-
-df_std.loc['man-1','left-x']
-
-
-# In[15]:
+# In[10]:
 
 from asl_utils import test_std_tryit
 # TODO Create a dataframe named `df_std` with standard deviations grouped by speaker
@@ -168,7 +152,7 @@ test_std_tryit(df_std)
 #         - adding additional deltas
 # 
 
-# In[48]:
+# In[11]:
 
 # TODO add features for normalized by speaker values of left, right, x, y
 # Name these 'norm-rx', 'norm-ry', 'norm-lx', and 'norm-ly'
@@ -180,49 +164,71 @@ for norm, xy in zip(features_norm, features_xy):
     asl.df[norm] = (asl.df[xy] - asl.df.groupby('speaker')[xy].transform('mean'))                    /asl.df.groupby('speaker')[xy].transform('std')
 
 
-# In[51]:
+# In[12]:
 
-asl.df[[norm,xy]].head()
+asl.df[[norm,xy]].head(3)
 
 
-# In[ ]:
+# In[13]:
 
 # TODO add features for polar coordinate values where the nose is the origin
 # Name these 'polar-rr', 'polar-rtheta', 'polar-lr', and 'polar-ltheta'
 # Note that 'polar-rr' and 'polar-rtheta' refer to the radius and angle
 
 features_polar = ['polar-rr', 'polar-rtheta', 'polar-lr', 'polar-ltheta']
-features_polar_radius = ['polar-rr','polar-lr']
-for polar, ground in zip (features_polar[0], features_ground[0]):
-    
+for side in list('rl'):
+    asl.df['polar-{}r'.format(side)] = np.sqrt(asl.df['grnd-{}x'.format(side)]**2 + asl.df['grnd-{}y'.format(side)]**2)
+    asl.df['polar-{}theta'.format(side)] = np.arctan2(asl.df['grnd-{}x'.format(side)], asl.df['grnd-{}y'.format(side)])    
+
+asl.df[features_ground+features_polar].head(2)
 
 
-# In[ ]:
+# In[29]:
 
 # TODO add features for left, right, x, y differences by one time step, i.e. the "delta" values discussed in the lecture
 # Name these 'delta-rx', 'delta-ry', 'delta-lx', and 'delta-ly'
 
 features_delta = ['delta-rx', 'delta-ry', 'delta-lx', 'delta-ly']
 
+indexes = [(s,side, xy) for s,side in zip(list('rl'),['right','left']) for xy in list('xy')]
+for s,side,xy in indexes:
+    asl.df['delta-{}{}'.format(s,xy)] = asl.df['{}-{}'.format(side,xy)].diff().fillna(0)
+    
+[x for x in asl.df.columns if x.startswith('delta')]
 
-# In[ ]:
+
+# In[34]:
 
 # TODO add features of your own design, which may be a combination of the above or something else
 # Name these whatever you would like
 
 # TODO define a list named 'features_custom' for building the training set
+features_custom = ['grnd-{}'.format(x) for x in features_delta]
+print('features_custom = ', features_custom)
+indexes = [(side, xy) for side in list('rl') for xy in list('xy')]
+for side,xy in indexes:
+    print(side,xy)
+    asl.df['grnd-delta-{}{}'.format(side,xy)] = asl.df['grnd-{}{}'.format(side,xy)].diff().fillna(0)
+
+asl.df[features_delta].head()
 
 
 # **Question 1:**  What custom features did you choose for the features_custom set and why?
 # 
 # **Answer 1:**
+# I chose a delta values for the ground values (i.e. referenced with respect to nose) since the person might be moving his hand during the process and taking this shift into account might matter. As you can see in the following box 20% of the time for delta-rx. This can make a difference in the overall output.
+
+# In[35]:
+
+len(asl.df[asl.df['grnd-delta-rx']!=asl.df['delta-rx']]) / len(asl.df)
+
 
 # <a id='part1_test'></a>
 # ### Features Unit Testing
 # Run the following unit tests as a sanity check on the defined "ground", "norm", "polar", and 'delta"
 # feature sets.  The test simply looks for some valid values but is not exhaustive.  However, the project should not be submitted if these tests don't pass.
 
-# In[52]:
+# In[36]:
 
 import unittest
 # import numpy as np
@@ -262,7 +268,7 @@ unittest.TextTestRunner().run(suite)
 # ##### Train a single word
 # Now that we have built a training set with sequence data, we can "train" models for each word.  As a simple starting example, we train a single word using Gaussian hidden Markov models (HMM).   By using the `fit` method during training, the [Baum-Welch Expectation-Maximization](https://en.wikipedia.org/wiki/Baum%E2%80%93Welch_algorithm) (EM) algorithm is invoked iteratively to find the best estimate for the model *for the number of hidden states specified* from a group of sample seequences. For this example, we *assume* the correct number of hidden states is 3, but that is just a guess.  How do we know what the "best" number of states for training is?  We will need to find some model selection technique to choose the best parameter.
 
-# In[ ]:
+# In[39]:
 
 import warnings
 from hmmlearn.hmm import GaussianHMM
