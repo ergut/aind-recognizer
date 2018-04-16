@@ -67,17 +67,16 @@ class SelectorBIC(ModelSelector):
     http://www2.imm.dtu.dk/courses/02433/doc/ch6_slides.pdf
     Bayesian information criteria: BIC = -2 * logL + p * logN
     """
+    def select(self):
+        """ select the best model for self.this_word based on
+        BIC score for n between self.min_n_components and self.max_n_components
 
-    #def select(self):
-    #    """ select the best model for self.this_word based on
-    #    BIC score for n between self.min_n_components and self.max_n_components
-    #
-    #    :return: GaussianHMM object
-    #    """
-    #    warnings.filterwarnings("ignore", category=DeprecationWarning)
+        :return: GaussianHMM object
+        """
+        warnings.filterwarnings("ignore", category=DeprecationWarning)
 
         # TODO implement model selection based on BIC scores
-        #raise NotImplementedError
+
 
         #logL = model.score(X, lengths)
     def calc_num_free_params(self, num_states, num_data_points):
@@ -138,27 +137,38 @@ class SelectorCV(ModelSelector):
 
         # TODO implement model selection using CV
 
-        split_method = KFold(random_state=self.random_state)
         max_logL = -np.inf
         selected_model = None
+        n_splits = min(3, len(self.sequences))
+        print('**** {} -- num sequences:{}, n_splits:{}, max states:{}'.format(self.this_word, len(self.sequences),
+                                                                n_splits, self.max_n_components+1))
 
         for num_states in range(self.min_n_components, self.max_n_components+1):
-            print('self.sequences len:{}'.format(len(self.sequences)))
-            if len(self.sequences) < 3:
-                continue
-            for train_idx, test_idx in split_method.split(self.sequences):
-                print(train_idx,test_idx)
-                # Train
-                self.X, self.lengths = combine_sequences(train_idx, self.sequences)
-                model = self.base_model(num_states)
-                # Validate
-                X_test, test_len = combine_sequences(test_idx, self.sequences)
-                logL = model.score(X_test, test_len)
+            print('    num_states:{}'.format(num_states))
+            for cv_train_idx, cv_test_idx in KFold(n_splits=n_splits, random_state=self.random_state).split(self.sequences):
+                try:
+                    # Train
+                    self.X, self.lengths = combine_sequences(cv_train_idx, self.sequences)
+                    model = self.base_model(num_states)
+                except:
+                    print('        xxxx Train failed. train:{}'.format(cv_train_idx))
+                    continue
+                try:
+                    # Validate
+                    X_test, test_len = combine_sequences(cv_test_idx, self.sequences)
+                    logL = model.score(X_test, test_len)
+                    if logL > max_logL:
+                        max_logL = logL
+                        selected_model = model
+                    print('        Max:{:,.0f}, logL:{:,.0f}, train_len:{}, test_len:{}, model states:{}'\
+                                    .format(max_logL, logL, len(cv_train_idx), len(cv_test_idx),
+                                            selected_model.n_components))
 
-                print('num_states:{}, Max:{}, logL:{}, train:{}, test:{}'.format(num_states, max_logL, logL,
-                                                                                 len(train_idx), len(test_idx)))
+                except:
+                    print('        xxxx Validation failed. train:{}, test:{}'.format(cv_train_idx,cv_test_idx))
+                    continue
 
-                if logL > max_logL:
-                    max_logL = logL
-                    selected_model = model
+        return selected_model
+
+
 
