@@ -97,7 +97,7 @@ print("Training words: {}".format(training.words))
 
 # The training data in `training` is an object of class `WordsData` defined in the `asl_data` module.  in addition to the `words` list, data can be accessed with the `get_all_sequences`, `get_all_Xlengths`, `get_word_sequences`, and `get_word_Xlengths` methods. We need the `get_word_Xlengths` method to train multiple sequences with the `hmmlearn` library.  In the following example, notice that there are two lists; the first is a concatenation of all the sequences(the X portion) and the second is a list of the sequence lengths(the Lengths portion).
 
-# In[7]:
+# In[8]:
 
 training.get_word_Xlengths('CHOCOLATE')
 
@@ -105,7 +105,7 @@ training.get_word_Xlengths('CHOCOLATE')
 # ###### More feature sets
 # So far we have a simple feature set that is enough to get started modeling.  However, we might get better results if we manipulate the raw values a bit more, so we will go ahead and set up some other options now for experimentation later.  For example, we could normalize each speaker's range of motion with grouped statistics using [Pandas stats](http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats) functions and [pandas groupby](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html).  Below is an example for finding the means of all speaker subgroups.
 
-# In[8]:
+# In[9]:
 
 df_means = asl.df.groupby('speaker').mean()
 df_means
@@ -113,7 +113,7 @@ df_means
 
 # To select a mean that matches by speaker, use the pandas [map](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.map.html) method:
 
-# In[9]:
+# In[10]:
 
 asl.df['left-x-mean']= asl.df['speaker'].map(df_means['left-x'])
 asl.df.head()
@@ -121,7 +121,7 @@ asl.df.head()
 
 # ##### Try it!
 
-# In[10]:
+# In[11]:
 
 from asl_utils import test_std_tryit
 # TODO Create a dataframe named `df_std` with standard deviations grouped by speaker
@@ -152,7 +152,7 @@ test_std_tryit(df_std)
 #         - adding additional deltas
 # 
 
-# In[11]:
+# In[12]:
 
 # TODO add features for normalized by speaker values of left, right, x, y
 # Name these 'norm-rx', 'norm-ry', 'norm-lx', and 'norm-ly'
@@ -164,12 +164,12 @@ for norm, xy in zip(features_norm, features_xy):
     asl.df[norm] = (asl.df[xy] - asl.df.groupby('speaker')[xy].transform('mean'))                    /asl.df.groupby('speaker')[xy].transform('std')
 
 
-# In[12]:
+# In[13]:
 
 asl.df[[norm,xy]].head(3)
 
 
-# In[13]:
+# In[14]:
 
 # TODO add features for polar coordinate values where the nose is the origin
 # Name these 'polar-rr', 'polar-rtheta', 'polar-lr', and 'polar-ltheta'
@@ -183,7 +183,7 @@ for side in list('rl'):
 asl.df[features_ground+features_polar].head(2)
 
 
-# In[29]:
+# In[15]:
 
 # TODO add features for left, right, x, y differences by one time step, i.e. the "delta" values discussed in the lecture
 # Name these 'delta-rx', 'delta-ry', 'delta-lx', and 'delta-ly'
@@ -197,7 +197,7 @@ for s,side,xy in indexes:
 [x for x in asl.df.columns if x.startswith('delta')]
 
 
-# In[34]:
+# In[16]:
 
 # TODO add features of your own design, which may be a combination of the above or something else
 # Name these whatever you would like
@@ -218,7 +218,7 @@ asl.df[features_delta].head()
 # **Answer 1:**
 # I chose a delta values for the ground values (i.e. referenced with respect to nose) since the person might be moving his hand during the process and taking this shift into account might matter. As you can see in the following box 20% of the time for delta-rx. This can make a difference in the overall output.
 
-# In[35]:
+# In[17]:
 
 len(asl.df[asl.df['grnd-delta-rx']!=asl.df['delta-rx']]) / len(asl.df)
 
@@ -228,7 +228,7 @@ len(asl.df[asl.df['grnd-delta-rx']!=asl.df['delta-rx']]) / len(asl.df)
 # Run the following unit tests as a sanity check on the defined "ground", "norm", "polar", and 'delta"
 # feature sets.  The test simply looks for some valid values but is not exhaustive.  However, the project should not be submitted if these tests don't pass.
 
-# In[36]:
+# In[18]:
 
 import unittest
 # import numpy as np
@@ -268,7 +268,7 @@ unittest.TextTestRunner().run(suite)
 # ##### Train a single word
 # Now that we have built a training set with sequence data, we can "train" models for each word.  As a simple starting example, we train a single word using Gaussian hidden Markov models (HMM).   By using the `fit` method during training, the [Baum-Welch Expectation-Maximization](https://en.wikipedia.org/wiki/Baum%E2%80%93Welch_algorithm) (EM) algorithm is invoked iteratively to find the best estimate for the model *for the number of hidden states specified* from a group of sample seequences. For this example, we *assume* the correct number of hidden states is 3, but that is just a guess.  How do we know what the "best" number of states for training is?  We will need to find some model selection technique to choose the best parameter.
 
-# In[39]:
+# In[19]:
 
 import warnings
 from hmmlearn.hmm import GaussianHMM
@@ -290,7 +290,7 @@ print("logL = {}".format(logL))
 
 # The HMM model has been trained and information can be pulled from the model, including means and variances for each feature and hidden state.  The [log likelihood](http://math.stackexchange.com/questions/892832/why-we-consider-log-likelihood-instead-of-likelihood-in-gaussian-distribution) for any individual sample or group of samples can also be calculated with the `score` method.
 
-# In[ ]:
+# In[20]:
 
 def show_model_stats(word, model):
     print("Number of states trained in model for {} is {}".format(word, model.n_components))    
@@ -307,7 +307,31 @@ show_model_stats(demoword, model)
 # ##### Try it!
 # Experiment by changing the feature set, word, and/or num_hidden_states values in the next cell to see changes in values.  
 
-# In[ ]:
+# In[21]:
+
+my_testword = 'CHOCOLATE'
+model, logL = train_a_word(my_testword, 3, features_ground) # Experiment here with different parameters
+show_model_stats(my_testword, model)
+print("logL = {}".format(logL))
+
+
+# In[22]:
+
+my_testword = 'CHOCOLATE'
+model, logL = train_a_word(my_testword, 5, features_ground) # Experiment here with different parameters
+show_model_stats(my_testword, model)
+print("logL = {}".format(logL))
+
+
+# In[26]:
+
+my_testword = 'CHOCOLATE'
+model, logL = train_a_word(my_testword, 3, features_custom) # Experiment here with different parameters
+show_model_stats(my_testword, model)
+print("logL = {}".format(logL))
+
+
+# In[27]:
 
 my_testword = 'CHOCOLATE'
 model, logL = train_a_word(my_testword, 3, features_ground) # Experiment here with different parameters
@@ -318,12 +342,12 @@ print("logL = {}".format(logL))
 # ##### Visualize the hidden states
 # We can plot the means and variances for each state and feature.  Try varying the number of states trained for the HMM model and examine the variances.  Are there some models that are "better" than others?  How can you tell?  We would like to hear what you think in the classroom online.
 
-# In[ ]:
+# In[28]:
 
 get_ipython().magic('matplotlib inline')
 
 
-# In[ ]:
+# In[29]:
 
 import math
 from matplotlib import (cm, pyplot as plt, mlab)
@@ -361,7 +385,7 @@ visualize(my_testword, model)
 # 
 # You will train each word in the training set with a range of values for the number of hidden states, and then score these alternatives with the model selector, choosing the "best" according to each strategy. The simple case of training with a constant value for `n_components` can be called using the provided `SelectorConstant` subclass as follow:
 
-# In[ ]:
+# In[30]:
 
 from my_model_selectors import SelectorConstant
 
@@ -423,7 +447,7 @@ Xlengths = training.get_all_Xlengths()
 for word in words_to_train:
     start = timeit.default_timer()
     model = SelectorCV(sequences, Xlengths, word, 
-                    min_n_components=2, max_n_components=15, random_state = 14).select()
+                    min_n_components=2, max_n_components=15, random_state=14, verbose=True).select()
     end = timeit.default_timer()-start
     if model is not None:
         print("Training complete for {} with {} states with time {} seconds".format(word, model.n_components, end))

@@ -68,16 +68,47 @@ class SelectorBIC(ModelSelector):
     Bayesian information criteria: BIC = -2 * logL + p * logN
     """
 
-    def select(self):
-        """ select the best model for self.this_word based on
-        BIC score for n between self.min_n_components and self.max_n_components
+    #def select(self):
+    #    """ select the best model for self.this_word based on
+    #    BIC score for n between self.min_n_components and self.max_n_components
+    #
+    #    :return: GaussianHMM object
+    #    """
+    #    warnings.filterwarnings("ignore", category=DeprecationWarning)
 
+        # TODO implement model selection based on BIC scores
+        #raise NotImplementedError
+
+        #logL = model.score(X, lengths)
+    def calc_num_free_params(self, num_states, num_data_points):
+        return ( num_states ** 2 ) + ( 2 * num_states * num_data_points ) - 1
+
+    def calc_score_bic(self, log_likelihood, num_free_params, num_data_points):
+        return (-2 * log_likelihood) + (num_free_params * np.log(num_data_points))
+
+    def calc_best_score_bic(self, score_bics):
+        # Min of list of lists comparing each item by value at index 0
+        return min(score_bics, key = lambda x: x[0])
+
+    def select(self):
+        """ Select best model for self.this_word based on BIC score
+        for n between self.min_n_components and self.max_n_components
         :return: GaussianHMM object
         """
         warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-        # TODO implement model selection based on BIC scores
-        raise NotImplementedError
+        score_bics = []
+        for num_states in range(self.min_n_components, self.max_n_components + 1):
+            try:
+                hmm_model = self.base_model(num_states)
+                log_likelihood = hmm_model.score(self.X, self.lengths)
+                num_data_points = sum(self.lengths)
+                num_free_params = self.calc_num_free_params(num_states, num_data_points)
+                score_bic = self.calc_score_bic(log_likelihood, num_free_params, num_data_points)
+                score_bics.append(tuple([score_bic, hmm_model]))
+            except:
+                pass
+        return self.calc_best_score_bic(score_bics)[1] if score_bics else None
 
 
 class SelectorDIC(ModelSelector):
@@ -106,4 +137,28 @@ class SelectorCV(ModelSelector):
         warnings.filterwarnings("ignore", category=DeprecationWarning)
 
         # TODO implement model selection using CV
-        raise NotImplementedError
+
+        split_method = KFold(random_state=self.random_state)
+        max_logL = -np.inf
+        selected_model = None
+
+        for num_states in range(self.min_n_components, self.max_n_components+1):
+            print('self.sequences len:{}'.format(len(self.sequences)))
+            if len(self.sequences) < 3:
+                continue
+            for train_idx, test_idx in split_method.split(self.sequences):
+                print(train_idx,test_idx)
+                # Train
+                self.X, self.lengths = combine_sequences(train_idx, self.sequences)
+                model = self.base_model(num_states)
+                # Validate
+                X_test, test_len = combine_sequences(test_idx, self.sequences)
+                logL = model.score(X_test, test_len)
+
+                print('num_states:{}, Max:{}, logL:{}, train:{}, test:{}'.format(num_states, max_logL, logL,
+                                                                                 len(train_idx), len(test_idx)))
+
+                if logL > max_logL:
+                    max_logL = logL
+                    selected_model = model
+
